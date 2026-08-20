@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Pickup | Rayyan Enterprises</title>
+<meta name="description" content="Schedule a secure, certified e-waste pickup for your organization. 48-hour SLA, GPS-tracked logistics, ISO-compliant data destruction.">
+<link rel="canonical" href="https://www.rayyanenterprises.example/request-pickup.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#006c49">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Request a Pickup | Rayyan Enterprises">
+<meta property="og:description" content="Deploy our certified logistics network for your end-of-life hardware. Track environmental impact in real time.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="request">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="nav-bar">
+    <a href="index.html" class="brand" aria-label="Rayyan Enterprises home"><img src="assets/images/logo.png" alt="Rayyan Enterprises logo" class="brand-logo" loading="eager"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html" data-nav="home">Home</a>
+      <a href="about-us.html" data-nav="about-us">About Us</a>
+      <a href="process.html" data-nav="process">Process</a>
+      <a href="services.html" data-nav="services">Services</a>
+      <a href="accepted-items.html" data-nav="items">Accepted Items</a>
+      <a href="impact.html" data-nav="impact">Impact</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="request-pickup.html" class="btn btn-primary btn-sm hide-mobile" data-nav="request" aria-current="page">Request Pickup</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <a href="index.html" data-nav="home">Home</a>
+      <a href="about-us.html" data-nav="about-us">About Us</a>
+      <a href="process.html" data-nav="process">Process</a>
+      <a href="services.html" data-nav="services">Services</a>
+      <a href="accepted-items.html" data-nav="items">Accepted Items</a>
+      <a href="impact.html" data-nav="impact">Impact</a>
+      <a href="request-pickup.html" class="btn btn-primary btn-full" style="margin-top:8px">Request Pickup</a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="page-shell">
+
+  <section class="request-hero tech-grid">
+    <div class="container request-grid">
+
+      <!-- Left copy -->
+      <div class="reveal">
+        <span class="chip"><svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M12 2l7 4v6c0 5-3.4 8.4-7 10-3.6-1.6-7-5-7-10V6l7-4z"/></svg> Enterprise Logistics</span>
+        <h1 class="display-lg" style="margin:16px 0;">Initiate Secure<br><span class="text-primary">E-Waste Collection</span></h1>
+        <p class="body-lg text-muted" style="max-width:420px; margin-bottom:24px;">Deploy our certified logistics network for your end-of-life hardware. Track environmental impact in real time.</p>
+        <div class="perks-desktop">
+          <div class="perk-item">
+            <span class="perk-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+            <div>
+              <h3 class="label-md">48-Hour SLA</h3>
+              <p class="body-md text-muted">Rapid deployment to major corporate centers globally.</p>
+            </div>
+          </div>
+          <div class="perk-item">
+            <span class="perk-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.4 8.4-7 10-3.6-1.6-7-5-7-10V6l7-4z"/></svg></span>
+            <div>
+              <h3 class="label-md">Data Destruction Certified</h3>
+              <p class="body-md text-muted">ISO-compliant on-site or off-site wiping protocols.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right form card -->
+      <div class="relative reveal reveal-delay-1">
+        <div class="form-card-glow" aria-hidden="true"></div>
+        <div class="form-card glass" data-wizard>
+
+          <div data-wizard-body>
+            <div style="border-bottom:1px solid var(--outline-variant); padding-bottom:16px; margin-bottom:24px;">
+              <h2 class="headline-sm mb-sm">Request Pickup</h2>
+              <div class="form-progress">
+                <div class="step-bar"></div>
+                <div class="step-bar"></div>
+                <div class="step-bar"></div>
+              </div>
+              <div class="form-steps-labels">
+                <span>Step 1: Logistics</span>
+                <span>Step 2: Inventory</span>
+                <span>Step 3: Confirm</span>
+              </div>
+            </div>
+
+            <form novalidate>
+              <!-- Step 1 -->
+              <div class="form-step">
+                <div class="grid grid-2" style="margin-bottom:16px;">
+                  <div class="field">
+                    <label for="company">Company Name</label>
+                    <input class="input" id="company" name="company" type="text" required placeholder="Enter organization name" autocomplete="organization">
+                    <span class="error-msg">Please enter your company name.</span>
+                  </div>
+                  <div class="field">
+                    <label for="industry">Industry</label>
+                    <select class="input" id="industry" name="industry" required>
+                      <option value="" disabled selected>Select industry</option>
+                      <option>Technology &amp; IT</option>
+                      <option>Healthcare</option>
+                      <option>Finance</option>
+                      <option>Manufacturing</option>
+                      <option>Education</option>
+                      <option>Other</option>
+                    </select>
+                    <span class="error-msg">Please select an industry.</span>
+                  </div>
+                </div>
+                <div class="grid grid-2">
+                  <div class="field">
+                    <label for="email">Contact Email</label>
+                    <input class="input" id="email" name="email" type="email" required placeholder="you@company.com" autocomplete="email">
+                    <span class="error-msg">Please enter a valid email address.</span>
+                  </div>
+                  <div class="field">
+                    <label for="date">Preferred Pickup Date</label>
+                    <input class="input" id="date" name="date" type="date" required>
+                    <span class="error-msg">Please choose a preferred date.</span>
+                  </div>
+                </div>
+                <div class="flex justify-between" style="margin-top:32px;">
+                  <span></span>
+                  <button type="button" class="btn btn-primary" data-action="next">Next Step
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="form-step">
+                <div class="grid grid-2" style="margin-bottom:16px;">
+                  <div class="field">
+                    <label for="volume">Estimated Volume (KG)</label>
+                    <input class="input" id="volume" name="volume" type="number" min="1" required placeholder="e.g., 500">
+                    <span class="error-msg">Please estimate the volume in kg.</span>
+                  </div>
+                  <div class="field">
+                    <label for="hardwareType">Primary Hardware Type</label>
+                    <select class="input" id="hardwareType" name="hardwareType" required>
+                      <option value="" disabled selected>Select primary category</option>
+                      <option>Servers &amp; Networking</option>
+                      <option>Workstations &amp; Laptops</option>
+                      <option>Mobile Devices</option>
+                      <option>Mixed Peripherals</option>
+                    </select>
+                    <span class="error-msg">Please select a hardware type.</span>
+                  </div>
+                </div>
+                <div class="field" style="margin-bottom:16px;">
+                  <label for="address">Pickup Address</label>
+                  <input class="input" id="address" name="address" type="text" required placeholder="Street, city, postal code" autocomplete="street-address">
+                  <span class="error-msg">Please enter a pickup address.</span>
+                </div>
+                <div class="field" style="border-top:1px solid var(--outline-variant); padding-top:16px;">
+                  <label>Contains specific materials? (optional)</label>
+                  <div class="chip-row" style="margin-top:8px;">
+                    <button type="button" class="chip is-toggle" data-material="Lithium-Ion" aria-pressed="false">
+                      <svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px;"><rect x="7" y="7" width="10" height="14" rx="2"/><path d="M10 3h4v4h-4z"/></svg> Lithium-Ion
+                    </button>
+                    <button type="button" class="chip is-toggle" data-material="Circuit Boards" aria-pressed="false">
+                      <svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px;"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/></svg> Circuit Boards
+                    </button>
+                    <button type="button" class="chip is-toggle" data-material="CRT Monitors" aria-pressed="false">
+                      <svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px;"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M9 20h6"/></svg> CRT Monitors
+                    </button>
+                  </div>
+                </div>
+                <div class="flex justify-between" style="margin-top:32px;">
+                  <button type="button" class="btn btn-secondary" data-action="prev">Back</button>
+                  <button type="button" class="btn btn-primary" data-action="next">Next Step
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="form-step">
+                <h3 class="label-md mb-sm">Review your request</h3>
+                <dl class="review-summary" data-review></dl>
+                <div class="flex justify-between" style="margin-top:32px; flex-wrap:wrap; gap:12px;">
+                  <button type="button" class="btn btn-secondary" data-action="prev">Back</button>
+                  <div class="flex gap-sm">
+                    <button type="button" class="btn btn-ghost" data-action="save-draft">Save Draft</button>
+                    <button type="submit" class="btn btn-primary" data-action="submit">Confirm Request
+                      <svg class="icon" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Success state -->
+          <div class="success-panel" data-success hidden>
+            <div class="success-icon"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <h2 class="headline-sm mb-xs">Request Received</h2>
+            <p class="body-md text-muted" style="max-width:380px; margin:0 auto 20px;">Our logistics team will confirm your 48-hour collection window by email shortly.</p>
+            <a href="index.html" class="btn btn-secondary">Back to Home</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="grid grid-2">
+      <div class="card reveal">
+        <div class="card-icon"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7v3h2v8h10v-8h2V9a7 7 0 00-7-7zm0 2a5 5 0 015 5v2H7V9a5 5 0 015-5zm-1 8h2v4h-2z"/></svg></div>
+        <h3 class="headline-sm mb-xs">Pickup across India</h3>
+        <p class="body-md text-muted">We offer doorstep pickup for bulk lots across India. For urgent enquiries, WhatsApp, email, or call directly.</p>
+        <div class="flex gap-sm" style="margin-top:16px; flex-wrap:wrap;">
+          <a href="tel:+919324758994" class="btn btn-secondary btn-sm">Call +91 9324758994</a>
+          <a href="mailto:rayyanenterprises04@gmail.com" class="btn btn-secondary btn-sm">Email rayyanenterprises04@gmail.com</a>
+          <a href="https://maps.google.com/?q=Rayyan+Enterprises+India" target="_blank" rel="noreferrer" class="btn btn-secondary btn-sm">View Office Address</a>
+        </div>
+        <p class="body-md text-muted" style="margin-top:16px;">
+          <strong>Address:</strong> Ashok Nagar Ghatkopar West, MUmbai, India<br>
+          <strong>Email:</strong> <a href="mailto:rayyanenterprises04@gmail.com" style="color:var(--primary);">rayyanenterprises04@gmail.com</a>
+        </p>
+      </div>
+      <div class="card reveal reveal-delay-1">
+        <div class="card-icon"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm0 4v4l3 2"/></svg></div>
+        <h3 class="headline-sm mb-xs">Common questions</h3>
+        <div style="display:grid; gap:10px;">
+          <div><strong>What kind of e-waste do you buy?</strong><br><span class="text-muted">Computers, laptops, servers, networking equipment, UPS units, batteries, printers, scanners, phones, tablets, medical and industrial electronics, and scrap cabling.</span></div>
+          <div><strong>Do you offer pickup, or do we need to drop off?</strong><br><span class="text-muted">We offer doorstep pickup across India for bulk lots. Individuals with small quantities can also arrange a scheduled collection.</span></div>
+          <div><strong>How is data destroyed?</strong><br><span class="text-muted">Storage media is wiped or physically shredded to NIST 800-88 standards, and every job comes with a signed destruction certificate.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="index.html" class="brand brand-footer" aria-label="Rayyan Enterprises home"><img src="assets/images/logo.png" alt="Rayyan Enterprises logo" class="brand-logo" loading="lazy"></a>
+      <p class="label-sm" style="color:var(--secondary-fixed-dim); max-width:260px;">Tech-Forward Sustainability.</p>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="process.html">Process</a>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <a href="accepted-items.html">Accepted Items</a>
+      <a href="impact.html">Impact Dashboard</a>
+      <a href="request-pickup.html">Request Pickup</a>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Data Security Compliance</a>
+      <a href="#">ISO Certification</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span data-year>2026</span> Rayyan Enterprises. All rights reserved.</span>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Back to top"><svg class="icon" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<script src="js/main.js" defer></script>
+</body>
+</html>

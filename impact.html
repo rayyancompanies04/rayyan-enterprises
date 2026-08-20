@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Environmental Impact Dashboard | Rayyan Enterprises</title>
+<meta name="description" content="Live environmental impact metrics: e-waste diverted, material recovery breakdown, carbon offset, and water saved through Rayyan Enterprises' zero-landfill recycling.">
+<link rel="canonical" href="https://www.rayyanenterprises.example/impact.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#006c49">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Environmental Impact Dashboard | Rayyan Enterprises">
+<meta property="og:description" content="Tracking our commitment to a sustainable circular economy through precise data and actionable metrics.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/pages.css">
+</head>
+<body data-page="impact">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="nav-bar">
+    <a href="index.html" class="brand" aria-label="Rayyan Enterprises home"><img src="assets/images/logo.png" alt="Rayyan Enterprises logo" class="brand-logo" loading="eager"></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html" data-nav="home">Home</a>
+      <a href="about-us.html" data-nav="about-us">About Us</a>
+      <a href="process.html" data-nav="process">Process</a>
+      <a href="services.html" data-nav="services">Services</a>
+      <a href="accepted-items.html" data-nav="items">Accepted Items</a>
+      <a href="impact.html" data-nav="impact">Impact</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="request-pickup.html" class="btn btn-primary btn-sm hide-mobile">Request Pickup</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <a href="index.html" data-nav="home">Home</a>
+      <a href="about-us.html" data-nav="about-us">About Us</a>
+      <a href="process.html" data-nav="process">Process</a>
+      <a href="services.html" data-nav="services">Services</a>
+      <a href="accepted-items.html" data-nav="items">Accepted Items</a>
+      <a href="impact.html" data-nav="impact">Impact</a>
+      <a href="request-pickup.html" class="btn btn-primary btn-full" style="margin-top:8px">Request Pickup</a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="tech-grid">
+
+  <section class="dash-hero container">
+    <h1 class="display-lg text-primary reveal">Environmental Impact</h1>
+    <p class="body-lg text-muted reveal reveal-delay-1" style="max-width:600px; margin:12px auto 0;">
+      Tracking our commitment to a sustainable circular economy through precise data and actionable metrics.
+    </p>
+  </section>
+
+  <section class="section-tight container">
+    <div class="dash-grid">
+
+      <!-- Total diverted -->
+      <div class="dash-panel span-2 glass reveal">
+        <div class="dash-glow" aria-hidden="true"></div>
+        <h2 class="headline-sm text-muted" style="font-weight:600;">Total e-Waste Diverted</h2>
+        <div class="flex items-center gap-xs" style="margin-top:8px;">
+          <span class="display-lg text-primary" data-counter="1245670">0</span>
+          <span class="headline-sm text-muted">kg</span>
+        </div>
+        <p class="body-md text-muted" style="margin-top:8px;">Updated from aggregated global logistics data.</p>
+      </div>
+
+      <!-- Material recovery -->
+      <div class="dash-panel glass reveal reveal-delay-1">
+        <h3 class="headline-sm text-muted" style="font-weight:600; border-bottom:1px solid var(--outline-variant); padding-bottom:10px; margin-bottom:14px;">Material Recovery</h3>
+        <div data-meter="45" class="material-row">
+          <div class="row-head"><span>Precious Metals (Gold/Silver)</span><span>45%</span></div>
+          <div class="meter"><div class="meter-fill" style="background:var(--primary);"></div></div>
+        </div>
+        <div data-meter="30" class="material-row">
+          <div class="row-head"><span>Copper</span><span>30%</span></div>
+          <div class="meter"><div class="meter-fill" style="background:var(--primary-fixed-dim);"></div></div>
+        </div>
+        <div data-meter="25" class="material-row">
+          <div class="row-head"><span>Plastics</span><span>25%</span></div>
+          <div class="meter"><div class="meter-fill" style="background:var(--tertiary-container);"></div></div>
+        </div>
+      </div>
+
+      <!-- Carbon offset -->
+      <div class="dash-panel glass reveal reveal-delay-2">
+        <h3 class="headline-sm text-muted" style="font-weight:600; margin-bottom:14px;">Carbon Offset</h3>
+        <div class="bar-chart">
+          <div class="bar" data-meter="33" style="height:0;"></div>
+          <div class="bar" data-meter="50" style="height:0;"></div>
+          <div class="bar is-dim" data-meter="75" style="height:0;"></div>
+          <div class="bar is-primary" data-meter="100" style="height:0;"></div>
+        </div>
+        <p class="label-sm text-muted text-center" style="margin-top:10px;">Metric tons CO₂e saved (Q1–Q4)</p>
+      </div>
+
+      <!-- Water saved -->
+      <div class="dash-panel span-2 glass reveal reveal-delay-3" style="display:flex; gap:24px; flex-wrap:wrap; align-items:center;">
+        <div style="flex:1; min-width:240px;">
+          <h3 class="headline-sm text-muted" style="font-weight:600;">Water Saved</h3>
+          <p class="body-md text-muted" style="margin:8px 0;">Through specialized closed-loop recycling processes, we significantly reduce freshwater consumption compared to traditional mining.</p>
+          <div class="headline-md text-primary" data-counter="8.5" data-suffix="M Liters">0</div>
+        </div>
+        <div style="flex:1; min-width:240px; height:190px; border-radius:var(--r-lg); overflow:hidden;">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw29YtwKWb-3Iz2zTs9fpVO66En9E4LkLtx6BmNog2tkI4BBj31uZcO6MQ3mLcHCMdHB08ALxnVCDg_RH8k7SFVpIWuf9_Qj7GDK2InXyK9q2G6AgWR7LpO_9_lymL_xRaiz4T11mIRasbYwosDbBbDlZM4GiFVUtV1vrx3XDXbxjSUlqkv9S55pcfA0STOlrf-NgR7PkFUB9BBhpyK0kwrQyYEY7pVJu7NEHKAkD9lCbl9-BHnEFpHw" alt="Clear water droplets on a polished metal surface, symbolizing conservation" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="glass card reveal" style="padding:28px; max-width:920px; margin:0 auto; text-align:center;">
+      <p class="label-sm text-primary" style="letter-spacing:0.12em; text-transform:uppercase; margin-bottom:8px;">Recovery over landfill, measured.</p>
+      <h2 class="headline-md mb-xs">Every kilogram we collect is tracked from pickup to final processing.</h2>
+      <p class="body-lg text-muted">We treat retired electronics as a resource stream rather than waste — maximizing recovery value, reducing landfill volume, and documenting the full chain for compliance and sustainability reporting.</p>
+    </div>
+  </section>
+
+  <!-- Commitment -->
+  <section class="section container">
+    <div class="commitment reveal">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1XpuyY-Hhhpd75V6U5KyzYcVxSD1I4o2UMZt80pv2M-EjBK-aWhkGbH9Vv9C8E_NV5jmaJNtWSONypQVfyAAviiY63jm3eqd4gHCKu15vl6PkZUeBF50qQV6nl8pBaVlukoUlSUhGrgJvZMN1iJYY94WQtC3PE-kaoDxkYsrUD7156EtutrGNhfDszwYQtQ9QtRH5ODgLRbXy4rnNwOiIWUi6-3VmdoEmBeGLyicuMXJAiiw-aIhu4Q" alt="Rows of pristine, organized electronic components ready for processing in a bright industrial facility" loading="lazy">
+      <div>
+        <span class="chip chip-primary" style="text-transform:uppercase;">Zero-Landfill Policy</span>
+        <h2 class="headline-md text-primary" style="margin:12px 0;">Our Commitment to the Future</h2>
+        <p class="body-lg text-muted" style="margin-bottom:20px;">We guarantee that 100% of the electronic materials we process are diverted from landfills. Every component is audited, tracked, and channeled back into the global supply chain, embodying true technical sustainability.</p>
+        <a href="services.html" class="btn btn-secondary">Read Our Full Policy</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="index.html" class="brand brand-footer" aria-label="Rayyan Enterprises home"><img src="assets/images/logo.png" alt="Rayyan Enterprises logo" class="brand-logo" loading="lazy"></a>
+      <p class="label-sm" style="color:var(--secondary-fixed-dim); max-width:260px;">Tech-Forward Sustainability. Leading the circular electronics economy with precision and purpose.</p>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="process.html">Process</a>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <a href="accepted-items.html">Accepted Items</a>
+      <a href="impact.html">Impact Dashboard</a>
+      <a href="request-pickup.html">Request Pickup</a>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Data Security Compliance</a>
+      <a href="#">ISO Certification</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span data-year>2026</span> Rayyan Enterprises. All rights reserved.</span>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Back to top"><svg class="icon" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<script src="js/main.js" defer></script>
+</body>
+</html>
