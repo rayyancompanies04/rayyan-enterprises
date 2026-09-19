@@ -1,0 +1,44 @@
+# Rayyan Enterprises — Apache / cPanel shared hosting
+Options -Indexes
+ErrorDocument 404 /404.html
+AddDefaultCharset UTF-8
+AddType image/svg+xml .svg
+AddType application/manifest+json .webmanifest
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# 1) force HTTPS on the bare domain (one hop, also fixes http://www.)
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^ https://rayyanenterprises.in%{REQUEST_URI} [L,R=301,QSA]
+# 2) www -> non-www
+RewriteCond %{HTTP_HOST} ^www\.rayyanenterprises\.in$ [NC]
+RewriteRule ^ https://rayyanenterprises.in%{REQUEST_URI} [L,R=301,QSA]
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript application/json application/manifest+json image/svg+xml application/xml text/plain
+</IfModule>
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access plus 1 hour"
+ExpiresByType text/css "access plus 30 days"
+ExpiresByType application/javascript "access plus 30 days"
+ExpiresByType image/png "access plus 30 days"
+ExpiresByType image/svg+xml "access plus 30 days"
+ExpiresByType image/x-icon "access plus 30 days"
+ExpiresByType image/vnd.microsoft.icon "access plus 30 days"
+ExpiresByType application/manifest+json "access plus 1 day"
+ExpiresByType application/xml "access plus 1 day"
+ExpiresByType text/plain "access plus 1 day"
+</IfModule>
+
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+# HSTS: only active once HTTPS is confirmed working. Remove this line if you are unsure.
+Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS
+</IfModule>

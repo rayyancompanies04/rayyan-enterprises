@@ -1,0 +1,31 @@
+{
+  "name": "Rayyan Enterprises",
+  "short_name": "Rayyan",
+  "description": "Scrap & e-waste management, demolition, labour supply, fencing, interior, glass and civil contractors.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "lang": "en-IN",
+  "theme_color": "#131518",
+  "background_color": "#FAF8F4",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
