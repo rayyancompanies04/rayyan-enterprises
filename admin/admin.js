@@ -15,7 +15,8 @@
     CREDENTIALS_KEY: 'rayyan_admin_credentials',
     API_BASE_URL: '/api', // Relative path - works on same domain (rayyanenterprises.in)
     MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB
-    ALLOWED_TYPES: ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']
+    ALLOWED_TYPES: ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
+    MAX_KV_DOCUMENT_SIZE: 25 * 1024 * 1024 // KV max value size (25MB)
   };
   
   // Category labels and colors
@@ -174,7 +175,7 @@
   async function init() {
     await loadCredentials();
     checkAuth();
-    loadDocuments();
+    await loadDocuments();
     setupEventListeners();
   }
   
@@ -302,7 +303,7 @@
   
   // Authentication
   function checkAuth() {
-    const session = sessionStorage.getItem(CONFIG.SESSION_KEY);
+    const session = localStorage.getItem(CONFIG.SESSION_KEY);
     if (session) {
       try {
         const sessionData = JSON.parse(session);
@@ -313,7 +314,7 @@
           return;
         }
       } catch (e) {
-        sessionStorage.removeItem(CONFIG.SESSION_KEY);
+        localStorage.removeItem(CONFIG.SESSION_KEY);
       }
     }
     showLogin();
@@ -340,7 +341,7 @@
         timestamp: Date.now()
       };
       
-      sessionStorage.setItem(CONFIG.SESSION_KEY, JSON.stringify(sessionData));
+      localStorage.setItem(CONFIG.SESSION_KEY, JSON.stringify(sessionData));
       
       showToast('Login successful', 'success');
       showDashboard();
@@ -355,7 +356,7 @@
   function logout() {
     state.isAuthenticated = false;
     state.currentUser = null;
-    sessionStorage.removeItem(CONFIG.SESSION_KEY);
+    localStorage.removeItem(CONFIG.SESSION_KEY);
     showLogin();
     showToast('Logged out successfully', 'info');
   }
@@ -382,22 +383,121 @@
   }
   
   // Document Management
-  function loadDocuments() {
+  async function loadDocuments() {
+    console.log('Loading documents...');
+    
+    try {
+      // Try to load from Cloudflare KV API
+      console.log('Attempting to load documents from KV API:', `${CONFIG.API_BASE_URL}/documents`);
+      const response = await fetch(`${CONFIG.API_BASE_URL}/documents`);
+      console.log('Documents API response status:', response.status);
+      
+      if (response.ok) {
+        const documents = await response.json();
+        console.log('Loaded documents from KV:', documents.length);
+        state.documents = documents;
+        return;
+      } else {
+        console.log('KV API returned non-OK status, using localStorage fallback');
+      }
+    } catch (error) {
+      console.log('Failed to load from KV, using localStorage fallback:', error);
+    }
+    
+    // Fallback to localStorage
+    console.log('Trying localStorage fallback for documents...');
     const stored = localStorage.getItem(CONFIG.DOCUMENTS_KEY);
     if (stored) {
       try {
-        state.documents = JSON.parse(stored);
+        const documents = JSON.parse(stored);
+        console.log('Loaded documents from localStorage:', documents.length);
+        state.documents = documents;
       } catch (e) {
+        console.log('localStorage data corrupted, using mock documents');
         state.documents = [...MOCK_DOCUMENTS];
       }
     } else {
+      console.log('No stored documents, using mock documents');
       state.documents = [...MOCK_DOCUMENTS];
       saveDocuments();
     }
   }
   
-  function saveDocuments() {
-    localStorage.setItem(CONFIG.DOCUMENTS_KEY, JSON.stringify(state.documents));
+  async function saveDocuments() {
+    console.log('Saving documents:', state.documents.length);
+    
+    try {
+      // Try to save to Cloudflare KV API
+      const totalSize = JSON.stringify(state.documents).length;
+      console.log('Total document data size:', totalSize, 'bytes');
+      
+      if (totalSize > CONFIG.MAX_KV_DOCUMENT_SIZE) {
+        console.log('Document data too large for KV, using localStorage fallback');
+        throw new Error('Data exceeds KV size limit');
+      }
+      
+      console.log('Attempting to save documents to KV API');
+      const response = await fetch(`${CONFIG.API_BASE_URL}/documents`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ document: state.documents[0] }) // Send the new document
+      });
+      
+      console.log('Documents save API response status:', response.status);
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Documents saved to KV successfully');
+        // Also save to localStorage as backup
+        localStorage.setItem(CONFIG.DOCUMENTS_KEY, JSON.stringify(state.documents));
+        return true;
+      } else {
+        console.log('KV save failed, using localStorage fallback');
+        throw new Error('KV save failed');
+      }
+    } catch (error) {
+      console.log('Failed to save to KV, using localStorage fallback:', error);
+      // Fallback to localStorage
+      localStorage.setItem(CONFIG.DOCUMENTS_KEY, JSON.stringify(state.documents));
+      return true;
+    }
+  }
+  
+  async function deleteDocumentFromStorage(documentId) {
+    console.log('Deleting document:', documentId);
+    
+    try {
+      // Try to delete via Cloudflare KV API
+      console.log('Attempting to delete document via KV API');
+      const response = await fetch(`${CONFIG.API_BASE_URL}/documents`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ documentId })
+      });
+      
+      console.log('Document delete API response status:', response.status);
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Document deleted from KV successfully');
+        // Also update localStorage
+        localStorage.setItem(CONFIG.DOCUMENTS_KEY, JSON.stringify(result.documents));
+        return result.documents;
+      } else {
+        console.log('KV delete failed, using local fallback');
+        throw new Error('KV delete failed');
+      }
+    } catch (error) {
+      console.log('Failed to delete from KV, using local fallback:', error);
+      // Fallback to local deletion
+      state.documents = state.documents.filter(doc => doc.id !== documentId);
+      localStorage.setItem(CONFIG.DOCUMENTS_KEY, JSON.stringify(state.documents));
+      return state.documents;
+    }
   }
   
   function formatFileSize(bytes) {
@@ -630,7 +730,7 @@
     reader.readAsDataURL(file);
   }
   
-  function uploadDocument() {
+  async function uploadDocument() {
     const title = elements.docTitle.value.trim();
     const category = elements.docCategory.value;
     const notes = elements.docNotes.value.trim();
@@ -664,7 +764,7 @@
     };
     
     state.documents.unshift(document);
-    saveDocuments();
+    await saveDocuments();
     
     // Reset form
     resetUploadForm();
@@ -774,11 +874,10 @@
     elements.deleteModal.classList.remove('hidden');
   }
   
-  function deleteDocument() {
+  async function deleteDocument() {
     if (!state.documentToDelete) return;
     
-    state.documents = state.documents.filter(d => d.id !== state.documentToDelete);
-    saveDocuments();
+    state.documents = await deleteDocumentFromStorage(state.documentToDelete);
     
     state.documentToDelete = null;
     elements.deleteModal.classList.add('hidden');
@@ -1005,9 +1104,9 @@
     });
     
     // Upload form submit
-    elements.uploadForm.addEventListener('submit', function(e) {
+    elements.uploadForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-      uploadDocument();
+      await uploadDocument();
     });
     
     // Category tabs

@@ -7,5 +7,10 @@ pages_build_output_dir = "."
 # KV Namespace Binding for Pages Functions
 [[kv_namespaces]]
 binding = "ADMIN_CREDENTIALS"
-id = "31fad13fb7a64884b2b78983a25d0091"  # Replace with your actual KV namespace ID
-preview_id = "your_preview_kv_namespace_id"  # Optional: for preview environments
+id = "fe6d26b1a99244db903d355721d0ccd4"
+preview_id = "your_preview_kv_namespace_id"
+
+[[kv_namespaces]]
+binding = "ADMIN_DOCUMENTS"
+id = "bb4bed8348f54201888a52f53679dc83"  # Create a new KV namespace for documents
+preview_id = "your_preview_documents_kv_namespace_id"
