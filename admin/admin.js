@@ -180,22 +180,30 @@
   
   // Credentials Management
   async function loadCredentials() {
+    console.log('Loading credentials...');
+    
     try {
       // Try to load from Cloudflare KV API
+      console.log('Attempting to load from Cloudflare KV API:', `${CONFIG.API_BASE_URL}/credentials`);
       const response = await fetch(`${CONFIG.API_BASE_URL}/credentials`);
+      console.log('KV API response status:', response.status);
+      
       if (response.ok) {
         const credentials = await response.json();
+        console.log('Loaded credentials from KV:', credentials);
         if (credentials.email && credentials.password) {
           CONFIG.ADMIN_EMAIL = credentials.email;
           CONFIG.ADMIN_PASSWORD = credentials.password;
+          console.log('Credentials updated from KV');
           return;
         }
       }
     } catch (error) {
-      console.log('Failed to load from KV, using localStorage fallback');
+      console.log('Failed to load from KV, using localStorage fallback:', error);
     }
     
     // Fallback to localStorage
+    console.log('Trying localStorage fallback...');
     const stored = localStorage.getItem(CONFIG.CREDENTIALS_KEY);
     if (stored) {
       try {
@@ -203,11 +211,15 @@
         if (credentials.email && credentials.password) {
           CONFIG.ADMIN_EMAIL = credentials.email;
           CONFIG.ADMIN_PASSWORD = credentials.password;
+          console.log('Credentials loaded from localStorage');
+          return;
         }
       } catch (e) {
-        // Use default credentials if stored data is corrupted
+        console.log('localStorage data corrupted, using defaults');
       }
     }
+    
+    console.log('Using default credentials');
   }
   
   async function saveCredentials(email, password) {
@@ -254,8 +266,11 @@
   }
   
   async function verifyCredentials(email, password) {
+    console.log('Verifying credentials for:', email);
+    
     try {
       // Try to verify via Cloudflare KV API
+      console.log('Attempting KV verification at:', `${CONFIG.API_BASE_URL}/credentials/verify`);
       const response = await fetch(`${CONFIG.API_BASE_URL}/credentials/verify`, {
         method: 'POST',
         headers: {
@@ -264,16 +279,25 @@
         body: JSON.stringify({ email, password })
       });
       
+      console.log('KV verification response status:', response.status);
+      
       if (response.ok) {
         const result = await response.json();
+        console.log('KV verification result:', result);
         return result.success;
+      } else {
+        console.log('KV verification failed, using local fallback');
       }
     } catch (error) {
-      console.log('Failed to verify via KV, using local fallback');
+      console.log('Failed to verify via KV, using local fallback:', error);
     }
     
     // Fallback to local verification
-    return email.toLowerCase() === CONFIG.ADMIN_EMAIL.toLowerCase() && password === CONFIG.ADMIN_PASSWORD;
+    const localValid = email.toLowerCase() === CONFIG.ADMIN_EMAIL.toLowerCase() && password === CONFIG.ADMIN_PASSWORD;
+    console.log('Local verification result:', localValid);
+    console.log('Expected email:', CONFIG.ADMIN_EMAIL.toLowerCase());
+    console.log('Expected password:', CONFIG.ADMIN_PASSWORD);
+    return localValid;
   }
   
   // Authentication
@@ -296,30 +320,36 @@
   }
   
   async function login(email, password) {
-    // Load the most recent credentials before checking
-    await loadCredentials();
-    
-    const isValid = await verifyCredentials(email, password);
-    
-    if (!isValid) {
-      showLoginError();
+    try {
+      // Load the most recent credentials before checking
+      await loadCredentials();
+      
+      const isValid = await verifyCredentials(email, password);
+      
+      if (!isValid) {
+        showLoginError();
+        return false;
+      }
+      
+      state.isAuthenticated = true;
+      state.currentUser = email;
+      
+      const sessionData = {
+        isAuthenticated: true,
+        email: email,
+        timestamp: Date.now()
+      };
+      
+      sessionStorage.setItem(CONFIG.SESSION_KEY, JSON.stringify(sessionData));
+      
+      showToast('Login successful', 'success');
+      showDashboard();
+      return true;
+    } catch (error) {
+      console.error('Login error:', error);
+      showLoginError('Login failed. Please try again.');
       return false;
     }
-    
-    state.isAuthenticated = true;
-    state.currentUser = email;
-    
-    const sessionData = {
-      isAuthenticated: true,
-      email: email,
-      timestamp: Date.now()
-    };
-    
-    sessionStorage.setItem(CONFIG.SESSION_KEY, JSON.stringify(sessionData));
-    
-    showToast('Login successful', 'success');
-    showDashboard();
-    return true;
   }
   
   function logout() {
@@ -343,7 +373,8 @@
     renderDocuments();
   }
   
-  function showLoginError() {
+  function showLoginError(message = 'Invalid email or password. Please try again.') {
+    elements.loginError.textContent = message;
     elements.loginError.classList.remove('hidden');
     setTimeout(() => {
       elements.loginError.classList.add('hidden');
